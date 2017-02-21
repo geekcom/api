@@ -16,3 +16,7 @@ Route::get('/', function () {
 });
 
 Route::post('api/v1/auth', 'AuthenticateController@authJwt');
+
+Route::group(['prefix' => 'api/v1', 'middleware' => 'jwt.auth'], function () {
+    
+});
