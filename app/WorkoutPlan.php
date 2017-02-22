@@ -10,7 +10,7 @@ class WorkoutPlan extends Model
     protected $primaryKey = 'id_workout_plan';
 
     protected $fillable = [
-        'name', 'description'
+        'fk_workout_type', 'fk_user', 'date'
     ];
 
     public function user()
@@ -22,4 +22,6 @@ class WorkoutPlan extends Model
     {
         return $this->belongsTo('App\WorkoutType');
     }
+
+
 }

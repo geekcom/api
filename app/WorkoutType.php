@@ -10,7 +10,7 @@ class WorkoutType extends Model
     protected $primaryKey = 'id_workout_type';
 
     protected $fillable = [
-        'fk_workout_type', 'fk_user', 'date'
+        'name', 'description'
     ];
 
     public function workoutPlan()

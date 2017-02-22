@@ -27,6 +27,6 @@ class AuthenticateController extends Controller
             return response()->json(['message' => 'success','token' => $token, 'user' => $user], 200);
         }
 
-        return 'FAIL';
+        return response()->json(['message' => 'error'], 500);
     }
 }

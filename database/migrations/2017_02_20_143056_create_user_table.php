@@ -18,9 +18,6 @@ class CreateUserTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('password');
-            $table->integer('age');
-            $table->decimal('weight', 3, 2);
-            $table->decimal('height', 3, 2);
             $table->timestamps();
         });
     }
