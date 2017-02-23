@@ -15,10 +15,12 @@ Route::get('api/v1', function () {
     return 'API';
 });
 
+//authentication route
 Route::post('api/v1/auth', 'AuthenticateController@authJwt');
 
+Route::post('api/v1/user/new', 'UserController@store');
 Route::group(['prefix' => 'api/v1/user', 'middleware' => 'jwt.auth'], function () {
-    Route::post('new', 'UserController@store');
+
     Route::get('show/{id}', 'UserController@show');
     Route::put('update/{id}', 'UserController@update');
     Route::delete('delete/{id}', 'UserController@delete');

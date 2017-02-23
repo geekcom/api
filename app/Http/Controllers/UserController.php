@@ -2,54 +2,28 @@
 
 namespace API\Http\Controllers;
 
-use API\User;
+use API\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function show($id)
+    public function show(UserRepositoryInterface $repository, Request $request, $id)
     {
-        $user = User::find($id);
-        return $user;
+        return $repository->show($request, $id);
     }
 
-    public function store(Request $request)
+    public function store(UserRepositoryInterface $repository, Request $request)
     {
-        $data = $request->only('name', 'email', 'password');
-        $data['password'] = Hash::make($data['password']);
-
-        $user = User::create($data);
-
-        if ($user) {
-            return response()->json(['message' => 'success'], 200);
-        }
-        return response()->json(['message' => 'error'], 500);
+        return $repository->store($request);
     }
 
-    public function update(Request $request, $id)
+    public function update(UserRepositoryInterface $repository, Request $request, $id)
     {
-        $data = $request->all();
-        $data['password'] = Hash::make($data['password']);
-
-        $user = User::findOrFail($id);
-        $user->fill($data)->save();
-
-        if ($user) {
-            return response()->json(['message' => 'success'], 200);
-        }
-        return response()->json(['message' => 'error'], 500);
+        return $repository->update($request, $id);
     }
 
-    public function delete($id)
+    public function delete(UserRepositoryInterface $repository, Request $request, $id)
     {
-        $user = User::findOrFail($id);
-
-        $user->delete();
-
-        if ($user) {
-            return response()->json(['message' => 'success'], 200);
-        }
-        return response()->json(['message' => 'error'], 500);
+        return $repository->delete($request, $id);
     }
 }
