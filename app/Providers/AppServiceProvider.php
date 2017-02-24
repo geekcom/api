@@ -25,5 +25,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('API\Repositories\Contracts\AuthenticateRepositoryInterface','API\Repositories\AuthenticateRepository');
         $this->app->bind('API\Repositories\Contracts\UserRepositoryInterface','API\Repositories\UserRepository');
+        $this->app->bind('API\Repositories\Contracts\WorkoutPlanRepositoryInterface','API\Repositories\WorkoutPlanRepository');
+        $this->app->bind('API\Repositories\Contracts\WorkoutTypeRepositoryInterface','API\Repositories\WorkoutTypeRepository');
+
     }
 }

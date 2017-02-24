@@ -2,51 +2,28 @@
 
 namespace API\Http\Controllers;
 
-use API\WorkoutType;
+use API\Repositories\Contracts\WorkoutTypeRepositoryInterface;
 use Illuminate\Http\Request;
 
 class WorkoutTypeController extends Controller
 {
-    public function show($id)
+    public function listAll(WorkoutTypeRepositoryInterface $repository)
     {
-        $workoutType = WorkoutType::find($id);
-        return $workoutType;
+        return $repository->listAll();
     }
 
-    public function store(Request $request)
+    public function store(WorkoutTypeRepositoryInterface $repository, Request $request)
     {
-        $data = $request->only('name', 'description');
-
-        $workoutType = WorkoutType::create($data);
-
-        if ($workoutType) {
-            return response()->json(['message' => 'success'], 200);
-        }
-        return response()->json(['message' => 'error'], 500);
+        return $repository->store($request);
     }
 
-    public function update(Request $request, $id)
+    public function update(WorkoutTypeRepositoryInterface $repository, Request $request, $id)
     {
-        $data = $request->all();
-
-        $workoutType = WorkoutType::findOrFail($id);
-        $workoutType->fill($data)->save();
-
-        if ($workoutType) {
-            return response()->json(['message' => 'success'], 200);
-        }
-        return response()->json(['message' => 'error'], 500);
+        return $repository->update($request, $id);
     }
 
-    public function delete($id)
+    public function delete(WorkoutTypeRepositoryInterface $repository, $id)
     {
-        $workoutType = WorkoutType::findOrFail($id);
-
-        $workoutType->delete();
-
-        if ($workoutType) {
-            return response()->json(['message' => 'success'], 200);
-        }
-        return response()->json(['message' => 'error'], 500);
+        return $repository->delete($id);
     }
 }

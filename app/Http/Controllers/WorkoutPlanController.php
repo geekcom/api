@@ -2,51 +2,28 @@
 
 namespace API\Http\Controllers;
 
-use API\WorkoutPlan;
+use API\Repositories\Contracts\WorkoutPlanRepositoryInterface;
 use Illuminate\Http\Request;
 
 class WorkoutPlanController extends Controller
 {
-    public function show($id)
+    public function show(WorkoutPlanRepositoryInterface $repository, $id)
     {
-        $workoutPlan = WorkoutPlan::find($id);
-        return $workoutPlan;
+        return $repository->show($id);
     }
 
-    public function store(Request $request)
+    public function store(WorkoutPlanRepositoryInterface $repository, Request $request)
     {
-        $data = $request->only('fk_workout_type', 'fk_user', 'date');
-
-        $workoutPlan = WorkoutPlan::create($data);
-
-        if ($workoutPlan) {
-            return response()->json(['message' => 'success'], 200);
-        }
-        return response()->json(['message' => 'error'], 500);
+        return $repository->store($request);
     }
 
-    public function update(Request $request, $id)
+    public function update(WorkoutPlanRepositoryInterface $repository, Request $request, $id)
     {
-        $data = $request->all();
-
-        $workoutPlan = WorkoutPlan::findOrFail($id);
-        $workoutPlan->fill($data)->save();
-
-        if ($workoutPlan) {
-            return response()->json(['message' => 'success'], 200);
-        }
-        return response()->json(['message' => 'error'], 500);
+        return $repository->update($request, $id);
     }
 
-    public function delete($id)
+    public function delete(WorkoutPlanRepositoryInterface $repository, $id)
     {
-        $workoutPlan = WorkoutPlan::findOrFail($id);
-
-        $workoutPlan->delete();
-
-        if ($workoutPlan) {
-            return response()->json(['message' => 'success'], 200);
-        }
-        return response()->json(['message' => 'error'], 500);
+        return $repository->delete($id);
     }
 }

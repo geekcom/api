@@ -17,8 +17,9 @@ class UserRepository implements UserRepositoryInterface
 
     public function show($id)
     {
-        $user = $this->model->find($id);
-        return $user;
+        $user = $this->model->findOrFail($id);
+
+        return response()->json(['status' => 'success', 'data' => ['user' => $user]], 200);
     }
 
     public function store($request)

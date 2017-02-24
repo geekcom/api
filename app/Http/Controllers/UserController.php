@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function show(UserRepositoryInterface $repository, Request $request, $id)
+    public function show(UserRepositoryInterface $repository, $id)
     {
-        return $repository->show($request, $id);
+        return $repository->show($id);
     }
 
     public function store(UserRepositoryInterface $repository, Request $request)
@@ -22,8 +22,8 @@ class UserController extends Controller
         return $repository->update($request, $id);
     }
 
-    public function delete(UserRepositoryInterface $repository, Request $request, $id)
+    public function delete(UserRepositoryInterface $repository, $id)
     {
-        return $repository->delete($request, $id);
+        return $repository->delete($id);
     }
 }

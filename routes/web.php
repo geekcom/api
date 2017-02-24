@@ -28,7 +28,7 @@ Route::group(['prefix' => 'api/v1/user', 'middleware' => 'jwt.auth'], function (
 
 Route::group(['prefix' => 'api/v1/workout_type', 'middleware' => 'jwt.auth'], function () {
     Route::post('new', 'WorkoutTypeController@store');
-    Route::get('show/{id}', 'WorkoutTypeController@show');
+    Route::get('list', 'WorkoutTypeController@listAll');
     Route::put('update/{id}', 'WorkoutTypeController@update');
     Route::delete('delete/{id}', 'WorkoutTypeController@delete');
 });
