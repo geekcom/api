@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class WorkoutPlanController extends Controller
 {
-    public function show(WorkoutPlanRepositoryInterface $repository, $id)
+    public function workoutPlanByUser(WorkoutPlanRepositoryInterface $repository, $id)
     {
-        return $repository->show($id);
+        return $repository->workoutPlanByUser($id);
     }
 
     public function store(WorkoutPlanRepositoryInterface $repository, Request $request)

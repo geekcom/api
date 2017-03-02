@@ -19,6 +19,9 @@ class UserRepository implements UserRepositoryInterface
     {
         $user = $this->model->findOrFail($id);
 
+        if (count($user) === 0) {
+            return response()->json(['message' => 'error'], 205);
+        }
         return response()->json(['status' => 'success', 'data' => ['user' => $user]], 200);
     }
 

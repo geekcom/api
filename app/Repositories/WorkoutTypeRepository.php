@@ -14,6 +14,13 @@ class WorkoutTypeRepository implements WorkoutTypeRepositoryInterface
         $this->model = $model;
     }
 
+    public function show($id)
+    {
+        $workoutType = $this->model->findOrFail($id);
+
+        return response()->json(['status' => 'success', 'data' => ['workoutType' => $workoutType]], 200);
+    }
+
     public function listAll()
     {
         $workoutType = $this->model->all();

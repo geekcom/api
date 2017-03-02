@@ -27,6 +27,7 @@ Route::group(['prefix' => 'api/v1/user', 'middleware' => 'jwt.auth'], function (
 });
 
 Route::group(['prefix' => 'api/v1/workout_type', 'middleware' => 'jwt.auth'], function () {
+    Route::get('show', 'WorkoutTypeController@show');
     Route::post('new', 'WorkoutTypeController@store');
     Route::get('list', 'WorkoutTypeController@listAll');
     Route::put('update/{id}', 'WorkoutTypeController@update');
@@ -35,7 +36,7 @@ Route::group(['prefix' => 'api/v1/workout_type', 'middleware' => 'jwt.auth'], fu
 
 Route::group(['prefix' => 'api/v1/workout_plan', 'middleware' => 'jwt.auth'], function () {
     Route::post('new', 'WorkoutPlanController@store');
-    Route::get('show/{id}', 'WorkoutPlanController@show');
+    Route::get('show/{id}', 'WorkoutPlanController@workoutPlanByUser');
     Route::put('update/{id}', 'WorkoutPlanController@update');
     Route::delete('delete/{id}', 'WorkoutPlanController@delete');
 });

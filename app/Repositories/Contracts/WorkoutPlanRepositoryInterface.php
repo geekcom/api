@@ -4,7 +4,7 @@ namespace API\Repositories\Contracts;
 
 interface WorkoutPlanRepositoryInterface
 {
-    public function show($id);
+    public function workoutPlanByUser($id);
 
     public function store($request);
 
