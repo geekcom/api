@@ -1,19 +1,16 @@
-# Workout Plan API
-A simple REST API for workout plans.
+#Workout Plan API
+REST API for workout plans.
 
 ---
 
 ##DOCUMENTATION:
 How to authenticate
-###Authentication:
-
-**POST** http://localhost/api/public/api/v1/auth
-
+####Authentication - `POST`
 ```sh
 http://localhost/api/public/api/v1/auth
 ```
 
-_BODY_
+_`BODY`_
 
 **email**   example@email.com
 
@@ -21,18 +18,17 @@ _BODY_
 
 ---
 
-How to create a new user:
-###User:
+##User
+####User - Create a new User 
 
-**POST** http://localhost/api/public/api/v1/user/new
-
+`POST`
 ```sh
-http://localhost/api/public/api/v1/user/new
+http://localhost/api/public/api/v1/user
 ```
 
 _HEADERS_
 
-**Authorization**   Bearer + token generated in auth route
+**Authorization Bearer + token generated in auth route**
 
 _BODY_
 
@@ -42,17 +38,27 @@ _BODY_
 
 **password**    **********
 
-How to update a user:
+####User - Show User data 
 
-**PUT** http://localhost/api/public/api/v1/user/update/{id_user}
-
+`GET`
 ```sh
-http://localhost/api/public/api/v1/user/update/1
+http://localhost/api/public/api/v1/user/{id_user}
 ```
 
 _HEADERS_
 
-**Authorization**   Bearer + token generated in auth route
+**Authorization Bearer + token generated in auth route**
+
+###User - Update a User's data
+`PUT`
+
+```sh
+http://localhost/api/public/api/v1/user/update/{id_user}
+```
+
+_HEADERS_
+
+**Authorization Bearer + token generated in auth route**
 
 **Content-Type**   application/x-www-form-urlencoded
 
@@ -63,3 +69,15 @@ _BODY_
 **email**   example@email.com
 
 **password**    **********
+
+
+###User - Delete a User
+`DELETE`
+
+```sh
+http://localhost/api/public/api/v1/user/{id_user}
+```
+
+_HEADERS_
+
+**Authorization Bearer + token generated in auth route**

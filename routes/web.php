@@ -18,14 +18,15 @@ Route::get('api/v1', function () {
 //authentication route
 Route::post('api/v1/auth', 'AuthenticateController@authJwt');
 
-Route::post('api/v1/user/new', 'UserController@store');
+//USER
+Route::post('api/v1/user', 'UserController@store');
 Route::group(['prefix' => 'api/v1/user', 'middleware' => 'jwt.auth'], function () {
-
-    Route::get('show/{id}', 'UserController@show');
-    Route::put('update/{id}', 'UserController@update');
-    Route::delete('delete/{id}', 'UserController@delete');
+    Route::get('{id}', 'UserController@show');
+    Route::put('{id}', 'UserController@update');
+    Route::delete('{id}', 'UserController@delete');
 });
 
+//Workout Type
 Route::group(['prefix' => 'api/v1/workout_type', 'middleware' => 'jwt.auth'], function () {
     Route::get('show', 'WorkoutTypeController@show');
     Route::post('new', 'WorkoutTypeController@store');
@@ -34,6 +35,7 @@ Route::group(['prefix' => 'api/v1/workout_type', 'middleware' => 'jwt.auth'], fu
     Route::delete('delete/{id}', 'WorkoutTypeController@delete');
 });
 
+//Workout Plan
 Route::group(['prefix' => 'api/v1/workout_plan', 'middleware' => 'jwt.auth'], function () {
     Route::post('new', 'WorkoutPlanController@store');
     Route::get('show/{id}', 'WorkoutPlanController@workoutPlanByUser');
