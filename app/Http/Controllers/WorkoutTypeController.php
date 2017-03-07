@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class WorkoutTypeController extends Controller
 {
+    public function store(WorkoutTypeRepositoryInterface $repository, Request $request)
+    {
+        return $repository->store($request);
+    }
+
     public function show(WorkoutTypeRepositoryInterface $repository, $id)
     {
         return $repository->show($id);
@@ -15,11 +20,6 @@ class WorkoutTypeController extends Controller
     public function listAll(WorkoutTypeRepositoryInterface $repository)
     {
         return $repository->listAll();
-    }
-
-    public function store(WorkoutTypeRepositoryInterface $repository, Request $request)
-    {
-        return $repository->store($request);
     }
 
     public function update(WorkoutTypeRepositoryInterface $repository, Request $request, $id)

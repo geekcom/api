@@ -3,14 +3,14 @@ REST API for workout plans.
 
 ---
 
-##DOCUMENTATION:
-How to authenticate
-####Authentication - `POST`
+##Authentication
+####Auth - User Authentication 
+`POST`
 ```sh
 http://localhost/api/public/api/v1/auth
 ```
 
-_`BODY`_
+**BODY**
 
 **email**   example@email.com
 
@@ -26,11 +26,11 @@ _`BODY`_
 http://localhost/api/public/api/v1/user
 ```
 
-_HEADERS_
+**HEADERS**
 
 **Authorization Bearer + token generated in auth route**
 
-_BODY_
+**BODY**
 
 **name**   exampleName
 
@@ -45,7 +45,7 @@ _BODY_
 http://localhost/api/public/api/v1/user/{id_user}
 ```
 
-_HEADERS_
+**HEADERS**
 
 **Authorization Bearer + token generated in auth route**
 
@@ -56,13 +56,13 @@ _HEADERS_
 http://localhost/api/public/api/v1/user/update/{id_user}
 ```
 
-_HEADERS_
+**HEADERS**
 
 **Authorization Bearer + token generated in auth route**
 
 **Content-Type**   application/x-www-form-urlencoded
 
-_BODY_
+**BODY**
 
 **name**   exampleName
 
@@ -78,6 +78,105 @@ _BODY_
 http://localhost/api/public/api/v1/user/{id_user}
 ```
 
-_HEADERS_
+**HEADERS**
+
+**Authorization Bearer + token generated in auth route**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##Workout Type
+####Workout Type - Create a new Workout Type
+
+`POST`
+```sh
+http://localhost/api/public/api/v1/workout_type
+```
+
+**HEADERS**
+
+**Authorization Bearer + token generated in auth route**
+
+**BODY**
+
+**name**   exampleName
+
+**description**   description example
+
+
+####Workout Type - Show a workout type
+
+`GET`
+```sh
+http://localhost/api/public/api/v1/workout_type/{id_workout_type}
+```
+
+**HEADERS**
+
+**Authorization Bearer + token generated in auth route**
+
+####Workout Type - List all workout types
+`GET`
+
+```sh
+http://localhost/api/public/api/v1/workout_type/list
+```
+
+**HEADERS**
+
+**Authorization Bearer + token generated in auth route**
+
+**Content-Type**   application/x-www-form-urlencoded
+
+**BODY**
+
+**name**   exampleName
+
+**email**   example@email.com
+
+**password**    **********
+
+
+####Workout Type - Update a workout type
+`PUT`
+
+```sh
+http://localhost/api/public/api/v1/workout_type/{id_workout_type}
+```
+
+**HEADERS**
+
+**Authorization Bearer + token generated in auth route**
+
+**BODY**
+
+**name**   exampleName
+
+**description**   description example
+
+####Workout Type - Delete a workout type
+`DELETE`
+
+```sh
+http://localhost/api/public/api/v1/workout_type/{id_workout_type}
+```
+
+**HEADERS**
 
 **Authorization Bearer + token generated in auth route**
