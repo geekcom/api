@@ -23,5 +23,4 @@ class WorkoutPlan extends Model
         return $this->belongsTo('App\WorkoutType');
     }
 
-
 }
