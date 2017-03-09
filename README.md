@@ -1,9 +1,11 @@
 #Workout Plan API
-REST API for workout plans.
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/geekcom/api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/geekcom/api/?branch=master)
 
-And **[here](https://github.com/geekcom/api)** is web app for this API
+###About
+This is a REST API for workout plans, [here](https://github.com/geekcom/api) is webapp for this API
 
 ---
+##How to use?
 
 ##Authentication
 ####Auth - User Authentication 
