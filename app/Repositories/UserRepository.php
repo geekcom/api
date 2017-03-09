@@ -27,7 +27,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function store($request)
     {
-        $data = $request->only('name', 'email', 'password');
+        $data = $request->only('first_name', 'last_name', 'email', 'password');
         $data['password'] = Hash::make($data['password']);
 
         $user = $this->model->create($data);

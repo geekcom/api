@@ -34,7 +34,9 @@ http://localhost/api/public/api/v1/user
 
 **BODY**
 
-**name**   exampleName
+**first_name**   examplefirstName
+
+**last_name**   examplelastName
 
 **email**   example@email.com
 
@@ -66,7 +68,9 @@ http://localhost/api/public/api/v1/user/update/{id_user}
 
 **BODY**
 
-**name**   exampleName
+**first_name**   examplefirstName
+
+**last_name**   examplelastName
 
 **email**   example@email.com
 

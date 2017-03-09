@@ -21,10 +21,10 @@ class WorkoutPlanRepository implements WorkoutPlanRepositoryInterface
             ->join('workout_type AS wkT', 'wkT.id_workout_type', '=', 'wkP.fk_workout_type')
             ->join('user AS u', 'wkP.fk_user', '=', 'u.id_user')
             ->where('wkP.fk_user', $id)
-            ->select('u.id_user', 'u.name as user_name', 'u.email AS user_email',
+            ->select('u.id_user', 'u.first_name as user_name', 'u.email AS user_email',
                 'wkT.name AS workout_type', 'wkT.description AS workout_type_description',
                 'wkP.date AS workout_plan_date')
-            ->distinct('u.name')
+            ->distinct('u.first_name')
             ->get();
 
         if (count($workoutPlanByUser) === 0) {
