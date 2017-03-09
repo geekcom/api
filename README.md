@@ -1,6 +1,8 @@
 #Workout Plan API
 REST API for workout plans.
 
+And **[here](https://github.com/geekcom/api)** is web app for this API
+
 ---
 
 ##Authentication
