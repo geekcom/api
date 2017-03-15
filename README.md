@@ -1,14 +1,14 @@
-#Workout Plan API
+# Workout Plan API
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/geekcom/api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/geekcom/api/?branch=master)
 
-###About
+### About
 This is a REST API for workout plans, [here](https://github.com/geekcom/api) is webapp for this API
 
 ---
-##How to use?
+## How to use?
 
-##Authentication
-####Auth - User Authentication 
+## Authentication
+#### Auth - User Authentication 
 `POST`
 ```sh
 http://localhost/api/public/api/v1/auth
@@ -24,8 +24,8 @@ http://localhost/api/public/api/v1/auth
 
 
 
-##User
-####User - Create a new User 
+## User
+#### User - Create a new User 
 
 `POST`
 ```sh
@@ -46,7 +46,7 @@ http://localhost/api/public/api/v1/user
 
 **password**    **********
 
-####User - Show User data 
+#### User - Show User data 
 
 `GET`
 ```sh
@@ -57,7 +57,7 @@ http://localhost/api/public/api/v1/user/{id_user}
 
 **Authorization Bearer + token generated in auth route**
 
-###User - Update a User's data
+### User - Update a User's data
 `PUT`
 
 ```sh
@@ -81,7 +81,7 @@ http://localhost/api/public/api/v1/user/update/{id_user}
 **password**    **********
 
 
-###User - Delete a User
+### User - Delete a User
 `DELETE`
 
 ```sh
@@ -94,8 +94,8 @@ http://localhost/api/public/api/v1/user/{id_user}
 
 
 
-##Workout Type
-####Workout Type - Create a new Workout Type
+## Workout Type
+#### Workout Type - Create a new Workout Type
 
 `POST`
 ```sh
@@ -113,7 +113,7 @@ http://localhost/api/public/api/v1/workout_type
 **description**   description example
 
 
-####Workout Type - Show a workout type
+#### Workout Type - Show a workout type
 
 `GET`
 ```sh
@@ -124,7 +124,7 @@ http://localhost/api/public/api/v1/workout_type/{id_workout_type}
 
 **Authorization Bearer + token generated in auth route**
 
-####Workout Type - List all workout types
+#### Workout Type - List all workout types
 `GET`
 
 ```sh
@@ -146,7 +146,7 @@ http://localhost/api/public/api/v1/workout_type/list
 **password**    **********
 
 
-####Workout Type - Update a workout type
+#### Workout Type - Update a workout type
 `PUT`
 
 ```sh
@@ -163,7 +163,7 @@ http://localhost/api/public/api/v1/workout_type/{id_workout_type}
 
 **description**   description example
 
-####Workout Type - Delete a workout type
+#### Workout Type - Delete a workout type
 `DELETE`
 
 ```sh
@@ -176,8 +176,8 @@ http://localhost/api/public/api/v1/workout_type/{id_workout_type}
 
 
 
-##Workout Plan
-####Workout Plan - Create a new Workout Plan
+## Workout Plan
+#### Workout Plan - Create a new Workout Plan
 
 `POST`
 ```sh
@@ -197,7 +197,7 @@ http://localhost/api/public/api/v1/workout_plan
 **date** Date
 
 
-####Workout Plan - Show a Workout Plan
+#### Workout Plan - Show a Workout Plan
 
 `GET`
 ```sh
@@ -208,7 +208,7 @@ http://localhost/api/public/api/v1/workout_plan/{id_workout_plan}
 
 **Authorization Bearer + token generated in auth route**
 
-####Workout Plan - Update a  Workout Plan
+#### Workout Plan - Update a  Workout Plan
 `PUT`
 
 ```sh
@@ -230,7 +230,7 @@ http://localhost/api/public/api/v1/workout_plan/{id_workout_plan}
 **password**    **********
 
 
-####Workout Plan - Update a Workout Plan
+#### Workout Plan - Update a Workout Plan
 `PUT`
 
 ```sh
@@ -249,7 +249,7 @@ http://localhost/api/public/api/v1/workout_type/{id_workout_type}
 
 **date** Date
 
-####Workout Plan - Delete a Workout Plan
+#### Workout Plan - Delete a Workout Plan
 `DELETE`
 
 ```sh
