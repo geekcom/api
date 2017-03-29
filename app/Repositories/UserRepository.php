@@ -3,21 +3,13 @@
 namespace API\Repositories;
 
 use API\Repositories\Contracts\UserRepositoryInterface;
-use API\User;
 use Illuminate\Support\Facades\Hash;
 
-class UserRepository implements UserRepositoryInterface
+class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
-    protected $model;
-
-    public function __construct(User $model)
-    {
-        $this->model = $model;
-    }
-
     public function show($id)
     {
-        $user = $this->model->findOrFail($id);
+        $user = $this->user->findOrFail($id);
 
         if (count($user) === 0) {
             return response()->json(['message' => 'error'], 205);
@@ -30,7 +22,7 @@ class UserRepository implements UserRepositoryInterface
         $data = $request->only('first_name', 'last_name', 'email', 'password');
         $data['password'] = Hash::make($data['password']);
 
-        $user = $this->model->create($data);
+        $user = $this->user->create($data);
 
         if ($user) {
             return response()->json(['message' => 'success'], 200);
@@ -43,7 +35,7 @@ class UserRepository implements UserRepositoryInterface
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
 
-        $user = $this->model->findOrFail($id);
+        $user = $this->user->findOrFail($id);
 
         $user->fill($data)->save();
 
@@ -55,7 +47,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function delete($id)
     {
-        $user = $this->model->findOrFail($id);
+        $user = $this->user->findOrFail($id);
 
         $user->delete();
 

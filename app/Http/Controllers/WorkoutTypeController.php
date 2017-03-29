@@ -16,12 +16,7 @@ class WorkoutTypeController extends Controller
     {
         return $repository->show($id);
     }
-
-    public function listAll(WorkoutTypeRepositoryInterface $repository)
-    {
-        return $repository->listAll();
-    }
-
+    
     public function update(WorkoutTypeRepositoryInterface $repository, Request $request, $id)
     {
         return $repository->update($request, $id);

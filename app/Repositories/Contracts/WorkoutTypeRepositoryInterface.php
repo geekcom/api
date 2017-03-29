@@ -8,8 +8,6 @@ interface WorkoutTypeRepositoryInterface
 
     public function show($id);
 
-    public function listAll();
-
     public function update($request, $id);
 
     public function delete($id);

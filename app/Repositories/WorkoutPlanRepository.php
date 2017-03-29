@@ -3,18 +3,10 @@
 namespace API\Repositories;
 
 use API\Repositories\Contracts\WorkoutPlanRepositoryInterface;
-use API\WorkoutPlan;
 use Illuminate\Support\Facades\DB;
 
-class WorkoutPlanRepository implements WorkoutPlanRepositoryInterface
+class WorkoutPlanRepository extends BaseRepository implements WorkoutPlanRepositoryInterface
 {
-    protected $model;
-
-    public function __construct(WorkoutPlan $model)
-    {
-        $this->model = $model;
-    }
-
     public function workoutPlanByUser($id)
     {
         $workoutPlanByUser = DB::table('workout_plan AS wkP')
@@ -38,7 +30,7 @@ class WorkoutPlanRepository implements WorkoutPlanRepositoryInterface
     {
         $data = $request->only('fk_workout_type', 'fk_user', 'date');
 
-        $workoutPlan = $this->model->create($data);
+        $workoutPlan = $this->workoutPlan->create($data);
 
         if ($workoutPlan) {
             return response()->json(['message' => 'success'], 200);
@@ -50,7 +42,7 @@ class WorkoutPlanRepository implements WorkoutPlanRepositoryInterface
     {
         $data = $request->all();
 
-        $workoutPlan = $this->model->findOrFail($id);
+        $workoutPlan = $this->workoutPlan->findOrFail($id);
         $workoutPlan->fill($data)->save();
 
         if ($workoutPlan) {
@@ -61,7 +53,7 @@ class WorkoutPlanRepository implements WorkoutPlanRepositoryInterface
 
     public function delete($id)
     {
-        $workoutPlan = $this->model->findOrFail($id);
+        $workoutPlan = $this->workoutPlan->findOrFail($id);
 
         $workoutPlan->delete();
 

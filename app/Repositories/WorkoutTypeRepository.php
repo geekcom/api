@@ -3,27 +3,13 @@
 namespace API\Repositories;
 
 use API\Repositories\Contracts\WorkoutTypeRepositoryInterface;
-use API\WorkoutType;
 
-class WorkoutTypeRepository implements WorkoutTypeRepositoryInterface
+class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeRepositoryInterface
 {
-    protected $model;
-
-    public function __construct(WorkoutType $model)
-    {
-        $this->model = $model;
-    }
-
     public function show($id)
     {
-        $workoutType = $this->model->findOrFail($id);
+        $workoutType = $this->workoutType->findOrFail($id);
 
-        return response()->json(['status' => 'success', 'data' => ['workoutType' => $workoutType]], 200);
-    }
-
-    public function listAll()
-    {
-        $workoutType = $this->model->all();
         return response()->json(['status' => 'success', 'data' => ['workoutType' => $workoutType]], 200);
     }
 
@@ -31,7 +17,7 @@ class WorkoutTypeRepository implements WorkoutTypeRepositoryInterface
     {
         $data = $request->only('name', 'description');
 
-        $workoutType = $this->model->create($data);
+        $workoutType = $this->workoutType->create($data);
 
         if ($workoutType) {
             return response()->json(['message' => 'success'], 200);
@@ -43,7 +29,7 @@ class WorkoutTypeRepository implements WorkoutTypeRepositoryInterface
     {
         $data = $request->all();
 
-        $workoutType = $this->model->findOrFail($id);
+        $workoutType = $this->workoutType->findOrFail($id);
         $workoutType->fill($data)->save();
 
         if ($workoutType) {
@@ -54,7 +40,7 @@ class WorkoutTypeRepository implements WorkoutTypeRepositoryInterface
 
     public function delete($id)
     {
-        $workoutType = $this->model->findOrFail($id);
+        $workoutType = $this->workoutType->findOrFail($id);
 
         $workoutType->delete();
 

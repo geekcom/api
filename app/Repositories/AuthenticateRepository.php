@@ -3,26 +3,15 @@
 namespace API\Repositories;
 
 use API\Repositories\Contracts\AuthenticateRepositoryInterface;
-use API\User;
-use Tymon\JWTAuth\JWTAuth;
 use Illuminate\Support\Facades\Hash;
 
-class AuthenticateRepository implements AuthenticateRepositoryInterface
+class AuthenticateRepository extends BaseRepository implements AuthenticateRepositoryInterface
 {
-    protected $model;
-    protected $JWTAuth;
-
-    public function __construct(User $model, JWTAuth $JWTAuth)
-    {
-        $this->model = $model;
-        $this->JWTAuth = $JWTAuth;
-    }
-
     public function authJWT($request)
     {
         $data = $request->only('email', 'password');
 
-        $user = $this->model->where('email', $data['email'])->first();
+        $user = $this->user->where('email', $data['email'])->first();
 
         if (count($user) > 0 && Hash::check($data['password'], $user->password)) {
             $token = $this->JWTAuth->fromUser($user);
