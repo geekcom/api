@@ -3,7 +3,9 @@
 namespace API\Repositories;
 
 use API\Repositories\Contracts\UserRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Exception;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -19,10 +21,17 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function store($request)
     {
-        $data = $request->only('first_name', 'last_name', 'email', 'password');
-        $data['password'] = Hash::make($data['password']);
+        DB::beginTransaction();
 
-        $user = $this->user->create($data);
+        try {
+            $data = $request->only('first_name', 'last_name', 'email', 'password');
+            $data['password'] = Hash::make($data['password']);
+            $user = $this->user->create($data);
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+        DB::commit();
 
         if ($user) {
             return response()->json(['message' => 'success'], 200);
