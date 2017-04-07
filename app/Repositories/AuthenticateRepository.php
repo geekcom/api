@@ -5,7 +5,7 @@ namespace API\Repositories;
 use API\Repositories\Contracts\AuthenticateRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
 
-class AuthenticateRepository extends BaseRepository implements AuthenticateRepositoryInterface
+final class AuthenticateRepository extends BaseRepository implements AuthenticateRepositoryInterface
 {
     public function authJWT($request)
     {

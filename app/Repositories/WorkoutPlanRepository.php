@@ -5,7 +5,7 @@ namespace API\Repositories;
 use API\Repositories\Contracts\WorkoutPlanRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
-class WorkoutPlanRepository extends BaseRepository implements WorkoutPlanRepositoryInterface
+final class WorkoutPlanRepository extends BaseRepository implements WorkoutPlanRepositoryInterface
 {
     public function workoutPlanByUser($id)
     {

@@ -4,7 +4,7 @@ namespace API\Repositories;
 
 use API\Repositories\Contracts\WorkoutTypeRepositoryInterface;
 
-class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeRepositoryInterface
+final class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeRepositoryInterface
 {
     public function show($id)
     {
