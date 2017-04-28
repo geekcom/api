@@ -3,15 +3,19 @@
 namespace API\Repositories;
 
 use API\Repositories\Contracts\UserRepositoryInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
-use Exception;
 
 final class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
     public function show($id)
     {
-        $user = $this->user->findOrFail($id);
-
+        try {
+            $user = $this->user->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['status' => 'fail', 'data' => ['SQLSTATE' => $e->getMessage()]], 400);
+        }
         if (count($user) === 0) {
             return response()->json(['message' => 'error'], 205);
         }
@@ -24,8 +28,8 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
             $data = $request->only('first_name', 'last_name', 'email', 'password');
             $data['password'] = Hash::make($data['password']);
             $user = $this->user->create($data);
-        } catch (Exception $e) {
-            throw $e;
+        } catch (QueryException $e) {
+            return response()->json(['status' => 'fail', 'data' => ['SQLSTATE' => $e->getCode()]], 400);
         }
 
         if ($user) {
@@ -36,27 +40,29 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
 
     public function update($request, $id)
     {
-        $data = $request->all();
-        $data['password'] = Hash::make($data['password']);
-
-        $user = $this->user->findOrFail($id);
-
-        $user->fill($data)->save();
+        try {
+            $data = $request->all();
+            $data['password'] = Hash::make($data['password']);
+            $user = $this->user->findOrFail($id);
+            $user->fill($data)->save();
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['status' => 'fail', 'data' => ['SQLSTATE' => $e->getMessage()]], 400);
+        }
 
         if ($user) {
             return response()->json(['message' => 'success'], 200);
         }
+
         return response()->json(['message' => 'error'], 500);
     }
 
     public function delete($id)
     {
-        $user = $this->user->findOrFail($id);
-
-        $user->delete();
-
-        if ($user) {
-            return response()->json(['message' => 'success'], 200);
+        try {
+            $user = $this->user->findOrFail($id);
+            $user->delete();
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['status' => 'fail', 'data' => ['SQLSTATE' => $e->getMessage()]], 400);
         }
         return response()->json(['message' => 'error'], 500);
     }
