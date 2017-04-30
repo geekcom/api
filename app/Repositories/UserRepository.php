@@ -17,7 +17,7 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
             return response()->json(['status' => 'fail', 'data' => ['SQLSTATE' => $e->getMessage()]], 400);
         }
         if (count($user) === 0) {
-            return response()->json(['message' => 'error'], 205);
+            return response()->json(['message' => 'error'], 404);
         }
         return response()->json(['status' => 'success', 'data' => ['user' => $user]], 200);
     }
@@ -27,15 +27,11 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
         try {
             $data = $request->only('first_name', 'last_name', 'email', 'password');
             $data['password'] = Hash::make($data['password']);
-            $user = $this->user->create($data);
+            $this->user->create($data);
         } catch (QueryException $e) {
             return response()->json(['status' => 'fail', 'data' => ['SQLSTATE' => $e->getCode()]], 400);
         }
-
-        if ($user) {
-            return response()->json(['message' => 'success'], 200);
-        }
-        return response()->json(['message' => 'error'], 500);
+        return response()->json(['message' => 'success'], 201);
     }
 
     public function update($request, $id)
@@ -48,12 +44,7 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
         } catch (ModelNotFoundException $e) {
             return response()->json(['status' => 'fail', 'data' => ['SQLSTATE' => $e->getMessage()]], 400);
         }
-
-        if ($user) {
-            return response()->json(['message' => 'success'], 200);
-        }
-
-        return response()->json(['message' => 'error'], 500);
+        return response()->json(['message' => 'success'], 200);
     }
 
     public function delete($id)
@@ -62,8 +53,8 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
             $user = $this->user->findOrFail($id);
             $user->delete();
         } catch (ModelNotFoundException $e) {
-            return response()->json(['status' => 'fail', 'data' => ['SQLSTATE' => $e->getMessage()]], 400);
+            return response()->json(['status' => 'fail', 'data' => ['SQLSTATE' => $e->getMessage()]], 404);
         }
-        return response()->json(['message' => 'error'], 500);
+        return response()->json(['message' => 'success'], 200);
     }
 }
