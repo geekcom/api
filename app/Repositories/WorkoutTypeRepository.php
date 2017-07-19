@@ -3,50 +3,84 @@
 namespace API\Repositories;
 
 use API\Repositories\Contracts\WorkoutTypeRepositoryInterface;
+use Validator;
 
 final class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeRepositoryInterface
 {
     public function show($id)
     {
-        $workoutType = $this->workoutType->findOrFail($id);
+        $workoutType = $this->workoutType->find($id);
 
-        return response()->json(['status' => 'success', 'data' => ['workoutType' => $workoutType]], 200);
+        if (count($workoutType) > 0) {
+            return response()->json(['status' => 'success', 'data' => ['workoutType' => $workoutType]], 200);
+        }
+        return response()->json(['status' => 'error', 'message' => 'no data'], 404);
     }
 
     public function store($request)
     {
-        $data = $request->only('name', 'description');
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'fail',
+                'data' => [
+                    'name' => 'required',
+                    'description' => 'required',
+                ]], 400);
+        }
 
         $workoutType = $this->workoutType->create($data);
 
-        if ($workoutType) {
-            return response()->json(['message' => 'success'], 200);
+        if (count($workoutType) > 0) {
+            return response()->json(['status' => 'success'], 201);
         }
-        return response()->json(['message' => 'error'], 500);
+        return response()->json(['status' => 'error'], 500);
     }
 
     public function update($request, $id)
     {
-        $data = $request->all();
+        $workoutType = $this->workoutType->find($id);
 
-        $workoutType = $this->workoutType->findOrFail($id);
-        $workoutType->fill($data)->save();
+        if (count($workoutType) > 0) {
 
-        if ($workoutType) {
-            return response()->json(['message' => 'success'], 200);
+            $data = $request->all();
+
+            $validator = Validator::make($data, [
+                'name' => 'sometimes|required',
+                'description' => 'sometimes|required',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 'fail',
+                    'data' => [
+                        'name' => 'required',
+                        'description' => 'required',
+                    ]], 400);
+            }
+
+            $workoutType->fill($data)->save();
+
+            return response()->json(['status' => 'success'], 200);
         }
-        return response()->json(['message' => 'error'], 500);
+
+        return response()->json(['status' => 'error'], 500);
     }
 
     public function delete($id)
     {
-        $workoutType = $this->workoutType->findOrFail($id);
+        $workoutType = $this->workoutType->find($id);
 
-        $workoutType->delete();
-
-        if ($workoutType) {
-            return response()->json(['message' => 'success'], 200);
+        if (count($workoutType) > 0) {
+            $workoutType->delete();
+            return response()->json(['status' => 'success', 'data' => null], 200);
         }
-        return response()->json(['message' => 'error'], 500);
+        return response()->json(['status' => 'error'], 404);
     }
 }

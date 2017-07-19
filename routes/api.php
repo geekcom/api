@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 //Authentication
 Route::post('v1/auth', 'AuthenticateController@authJwt');
 
-//User
+//Users
 Route::post('v1/users', 'UserController@store');
 Route::group(['prefix' => 'v1/users', 'middleware' => 'jwt.auth'], function () {
     Route::get('{id}', 'UserController@show');
@@ -24,7 +24,7 @@ Route::group(['prefix' => 'v1/users', 'middleware' => 'jwt.auth'], function () {
     Route::delete('{id}', 'UserController@delete');
 });
 
-//Workout Type
+//Workout Types
 Route::group(['prefix' => 'v1/workout_types', 'middleware' => 'jwt.auth'], function () {
     Route::post('/', 'WorkoutTypeController@store');
     Route::get('{id}', 'WorkoutTypeController@show');
@@ -32,7 +32,7 @@ Route::group(['prefix' => 'v1/workout_types', 'middleware' => 'jwt.auth'], funct
     Route::delete('{id}', 'WorkoutTypeController@delete');
 });
 
-//Workout Plan
+//Workout Plans
 Route::group(['prefix' => 'v1/workout_plans', 'middleware' => 'jwt.auth'], function () {
     Route::post('/', 'WorkoutPlanController@store');
     Route::get('{id}', 'WorkoutPlanController@workoutPlanByUser');

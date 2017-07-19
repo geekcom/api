@@ -12,5 +12,5 @@
 */
 
 Route::get('api/v1', function () {
-    return 'API';
+    return 'Welcome to Workout Plans API';
 });
