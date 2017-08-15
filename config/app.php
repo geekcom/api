@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'WorkoutPlan API',
 
     /*
     |--------------------------------------------------------------------------
@@ -173,7 +173,6 @@ return [
         * JWT Service Provider
         */
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-        Barryvdh\Cors\ServiceProvider::class,
 
         /*
          * Application Service Providers...
