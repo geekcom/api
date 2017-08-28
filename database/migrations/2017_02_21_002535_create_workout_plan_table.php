@@ -16,6 +16,8 @@ class CreateWorkoutPlanTable extends Migration
         Schema::create('workout_plan', function (Blueprint $table) {
             $table->increments('id_workout_plan');
 
+            $table->uuid('uuid');
+
             $table->integer('fk_workout_type')->unsigned();
             $table->foreign('fk_workout_type')->references('id_workout_type')->on('workout_type');
 

@@ -2,15 +2,18 @@
 
 namespace API;
 
+use API\Traits\UuidTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    use UuidTrait;
+
     protected $table = 'user';
     protected $primaryKey = 'id_user';
 
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password'
+        'uuid', 'first_name', 'last_name', 'email', 'password'
     ];
 
     protected $hidden = [

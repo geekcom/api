@@ -15,6 +15,7 @@ class CreateWorkoutTypeTable extends Migration
     {
         Schema::create('workout_type', function (Blueprint $table) {
             $table->increments('id_workout_type');
+            $table->uuid('uuid');
             $table->string('name');
             $table->string('description');
             $table->timestamps();

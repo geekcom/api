@@ -167,7 +167,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-        
+
 
         /*
         * JWT Service Provider
@@ -233,7 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         /*
-        * JWT _Auth
+        * JWT_Auth
         */
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,

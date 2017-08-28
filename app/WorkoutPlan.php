@@ -2,15 +2,18 @@
 
 namespace API;
 
+use API\Traits\UuidTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class WorkoutPlan extends Model
 {
+    use UuidTrait;
+
     protected $table = 'workout_plan';
     protected $primaryKey = 'id_workout_plan';
 
     protected $fillable = [
-        'fk_workout_type', 'fk_user', 'date'
+        'uuid', 'fk_workout_type', 'fk_user', 'date'
     ];
 
     public function user()
