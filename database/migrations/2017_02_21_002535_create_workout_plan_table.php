@@ -14,17 +14,16 @@ class CreateWorkoutPlanTable extends Migration
     public function up()
     {
         Schema::create('workout_plan', function (Blueprint $table) {
-            $table->increments('id_workout_plan');
+            $table->increments('id');
 
             $table->uuid('uuid');
 
             $table->integer('fk_workout_type')->unsigned();
-            $table->foreign('fk_workout_type')->references('id_workout_type')->on('workout_type');
+            $table->foreign('fk_workout_type')->references('id')->on('workout_type');
 
             $table->integer('fk_user')->unsigned();
-            $table->foreign('fk_user')->references('id_user')->on('user');
+            $table->foreign('fk_user')->references('id')->on('user');
 
-            $table->dateTime('date');
             $table->timestamps();
         });
     }

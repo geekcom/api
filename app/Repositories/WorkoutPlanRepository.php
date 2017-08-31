@@ -10,18 +10,16 @@ final class WorkoutPlanRepository extends BaseRepository implements WorkoutPlanR
 {
     public function workoutPlanByUser($id)
     {
-        $workoutPlanByUser = DB::table('workout_plan AS wkP')
-            ->join('workout_type AS wkT', 'wkT.id_workout_type', '=', 'wkP.fk_workout_type')
-            ->join('user AS u', 'wkP.fk_user', '=', 'u.id_user')
+        $workoutPlansByUser = DB::table('workout_plan AS wkP')
+            ->join('workout_type AS wkT', 'wkT.id', '=', 'wkP.fk_workout_type')
+            ->join('user AS u', 'wkP.fk_user', '=', 'u.id')
             ->where('wkP.fk_user', $id)
-            ->select('u.id_user', 'u.first_name as user_name', 'u.email AS user_email',
-                'wkT.name AS workout_type', 'wkT.description AS workout_type_description',
-                'wkP.id_workout_plan AS workout_plan_id',
-                'wkP.date AS workout_plan_date')
+            ->select('wkP.id', 'wkP.uuid', 'u.first_name as user_name', 'u.email AS user_email',
+                'wkT.name AS workout_type', 'wkT.description AS workout_type_description')
             ->get();
 
-        if (count($workoutPlanByUser) > 0) {
-            return response()->json(['status' => 'success', 'data' => ['workoutPlanByUser' => $workoutPlanByUser]], 200);
+        if (count($workoutPlansByUser) > 0) {
+            return response()->json(['status' => 'success', 'data' => ['workoutPlanByUser' => $workoutPlansByUser]], 200);
         }
         return response()->json(['status' => 'error', 'message' => 'no data'], 404);
     }
@@ -33,7 +31,6 @@ final class WorkoutPlanRepository extends BaseRepository implements WorkoutPlanR
         $validator = Validator::make($data, [
             'fk_workout_type' => 'required',
             'fk_user' => 'required',
-            'date' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -42,7 +39,6 @@ final class WorkoutPlanRepository extends BaseRepository implements WorkoutPlanR
                 'data' => [
                     'fk_workout_type' => 'required',
                     'fk_user' => 'required',
-                    'date' => 'required',
                 ]], 400);
         }
 
@@ -65,7 +61,6 @@ final class WorkoutPlanRepository extends BaseRepository implements WorkoutPlanR
             $validator = Validator::make($data, [
                 'fk_workout_type' => 'sometimes|required',
                 'fk_user' => 'sometimes|required',
-                'date' => 'sometimes|required',
             ]);
 
             if ($validator->fails()) {
@@ -74,7 +69,6 @@ final class WorkoutPlanRepository extends BaseRepository implements WorkoutPlanR
                     'data' => [
                         'fk_workout_type' => 'required',
                         'fk_user' => 'required',
-                        'date' => 'required',
                     ]], 400);
             }
 

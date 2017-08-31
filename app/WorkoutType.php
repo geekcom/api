@@ -10,7 +10,7 @@ class WorkoutType extends Model
     use UuidTrait;
 
     protected $table = 'workout_type';
-    protected $primaryKey = 'id_workout_type';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'uuid', 'name', 'description'

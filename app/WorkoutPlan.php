@@ -10,10 +10,10 @@ class WorkoutPlan extends Model
     use UuidTrait;
 
     protected $table = 'workout_plan';
-    protected $primaryKey = 'id_workout_plan';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
-        'uuid', 'fk_workout_type', 'fk_user', 'date'
+        'uuid', 'fk_workout_type', 'fk_user'
     ];
 
     public function user()

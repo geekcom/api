@@ -10,7 +10,7 @@ class User extends Authenticatable
     use UuidTrait;
 
     protected $table = 'user';
-    protected $primaryKey = 'id_user';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'uuid', 'first_name', 'last_name', 'email', 'password'

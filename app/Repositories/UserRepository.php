@@ -64,7 +64,7 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
                 'email' => [
                     'sometimes',
                     'required',
-                    Rule::unique('user')->ignore($id, 'id_user'),
+                    Rule::unique('user')->ignore($id, 'id'),
                 ],
                 'password' => 'sometimes|required',
             ]);

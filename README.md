@@ -2,7 +2,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/geekcom/api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/geekcom/api/?branch=master)
 
 ### About
-This is a generic REST API for workout plans, [here](https://github.com/geekcom/api) is webapp for this API
+This is a generic REST API for workout plans.
 
 ---
 ## How to use?
@@ -62,14 +62,14 @@ http://localhost:8000/api/v1/users/{id_user}
 `PUT`
 
 ```sh
-http://localhost:8000/api/v1/users/{id_user}
+http://localhost:8000/api/v1/users/{id}
 ```
 
 **HEADERS**
 
 **Authorization Bearer + token generated in auth route**
 
-**Content-Type**   application/x-www-form-urlencoded
+**Content-Type**   application/json
 
 **BODY**
 
@@ -86,7 +86,7 @@ http://localhost:8000/api/v1/users/{id_user}
 `DELETE`
 
 ```sh
-http://localhost:8000/api/v1/users/{id_user}
+http://localhost:8000/api/v1/users/{id}
 ```
 
 **HEADERS**
@@ -118,33 +118,12 @@ http://localhost:8000/api/v1/workout_types
 
 `GET`
 ```sh
-http://localhost:8000/api/v1/workout_types/{id_workout_type}
+http://localhost:8000/api/v1/workout_types/{id}
 ```
 
 **HEADERS**
 
 **Authorization Bearer + token generated in auth route**
-
-#### Workout Types - List all workout types
-`GET`
-
-```sh
-http://localhost:8000/api/v1/workout_types/list
-```
-
-**HEADERS**
-
-**Authorization Bearer + token generated in auth route**
-
-**Content-Type**   application/x-www-form-urlencoded
-
-**BODY**
-
-**name**   exampleName
-
-**email**   example@email.com
-
-**password**    **********
 
 
 #### Workout Types - Update a workout type
@@ -168,13 +147,12 @@ http://localhost:8000/api/v1/workout_types/{id_workout_type}
 `DELETE`
 
 ```sh
-http://localhost:8000/api/v1/workout_types/{id_workout_type}
+http://localhost:8000/api/v1/workout_types/{id}
 ```
 
 **HEADERS**
 
 **Authorization Bearer + token generated in auth route**
-
 
 
 ## Workout Plans
@@ -202,7 +180,7 @@ http://localhost:8000/api/v1/workout_plans
 
 `GET`
 ```sh
-http://localhost:8000/api/v1/workout_plans/{id_workout_plan}
+http://localhost:8000/api/v1/workout_plans/{id}
 ```
 
 **HEADERS**
@@ -213,14 +191,14 @@ http://localhost:8000/api/v1/workout_plans/{id_workout_plan}
 `PUT`
 
 ```sh
-http://localhost:8000/api/v1/workout_plans/{id_workout_plan}
+http://localhost:8000/api/v1/workout_plans/{id}
 ```
 
 **HEADERS**
 
 **Authorization Bearer + token generated in auth route**
 
-**Content-Type**   application/x-www-form-urlencoded
+**Content-Type**   application/json
 
 **BODY**
 
@@ -235,7 +213,7 @@ http://localhost:8000/api/v1/workout_plans/{id_workout_plan}
 `PUT`
 
 ```sh
-http://localhost:8000/api/v1/workout_types/{id_workout_type}
+http://localhost:8000/api/v1/workout_types/{id}
 ```
 
 **HEADERS**
@@ -254,7 +232,7 @@ http://localhost:8000/api/v1/workout_types/{id_workout_type}
 `DELETE`
 
 ```sh
-http://localhost:8000/api/v1/workout_plans/{id_workout_plan}
+http://localhost:8000/api/v1/workout_plans/{id}
 ```
 
 **HEADERS**
