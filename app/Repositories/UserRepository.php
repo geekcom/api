@@ -4,7 +4,7 @@ namespace API\Repositories;
 
 use API\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 final class UserRepository extends BaseRepository implements UserRepositoryInterface
@@ -13,7 +13,7 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
     {
         $user = $this->user->find($id);
 
-        if (count($user) > 0) {
+        if ($user) {
             return response()->json(['status' => 'success', 'data' => ['user' => $user]], 200);
         }
         return response()->json(['status' => 'error', 'message' => 'no data'], 404);
@@ -39,12 +39,12 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
                     'last_name' => 'required',
                     'email' => 'required|unique',
                     'password' => 'required',
-                ]], 400);
+                ]], 422);
         }
 
-        $create = $this->user->create($data);
+        $createUser = $this->user->create($data);
 
-        if (count($create) > 0) {
+        if ($createUser) {
             return response()->json(['status' => 'success'], 201);
         }
         return response()->json(['status' => 'error'], 500);
@@ -54,7 +54,7 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
     {
         $user = $this->user->find($id);
 
-        if (count($user) > 0) {
+        if ($user) {
 
             $data = $request->all();
 
@@ -77,7 +77,7 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
                         'last_name' => 'required',
                         'email' => 'required|unique_key',
                         'password' => 'required',
-                    ]], 400);
+                    ]], 422);
             }
 
             if (isset($data['password'])) {
@@ -96,7 +96,7 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
     {
         $user = $this->user->find($id);
 
-        if (count($user) > 0) {
+        if ($user) {
             $user->delete();
             return response()->json(['status' => 'success', 'data' => null], 200);
         }

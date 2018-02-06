@@ -32,7 +32,7 @@ final class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeR
                 'data' => [
                     'name' => 'required',
                     'description' => 'required',
-                ]], 400);
+                ]], 422);
         }
 
         $workoutType = $this->workoutType->create($data);
@@ -62,7 +62,7 @@ final class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeR
                     'data' => [
                         'name' => 'required',
                         'description' => 'required',
-                    ]], 400);
+                    ]], 422);
             }
 
             $workoutType->fill($data)->save();

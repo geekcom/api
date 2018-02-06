@@ -18,12 +18,12 @@ class WorkoutPlan extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('API\User', 'fk_user');
     }
 
     public function workoutType()
     {
-        return $this->belongsTo('App\WorkoutType');
+        return $this->belongsTo('API\WorkoutType', 'fk_workout_type');
     }
 
 }
