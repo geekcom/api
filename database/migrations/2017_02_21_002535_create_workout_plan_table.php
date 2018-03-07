@@ -25,6 +25,7 @@ class CreateWorkoutPlanTable extends Migration
             $table->foreign('fk_user')->references('id')->on('user');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

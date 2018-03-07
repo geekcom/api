@@ -3,9 +3,9 @@
 namespace API\Repositories;
 
 use Tymon\JWTAuth\JWTAuth;
-use API\User;
-use API\WorkoutType;
-use API\WorkoutPlan;
+use API\Models\User;
+use API\Models\WorkoutType;
+use API\Models\WorkoutPlan;
 
 class BaseRepository
 {
