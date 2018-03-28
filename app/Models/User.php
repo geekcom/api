@@ -12,7 +12,7 @@ class User extends Authenticatable
     use SoftDeletes;
 
     protected $table = 'user';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'user_id';
 
     protected $fillable = [
         'uuid', 'first_name', 'last_name', 'email', 'password'
@@ -28,6 +28,6 @@ class User extends Authenticatable
 
     public function workoutPlan()
     {
-        return $this->hasMany('API\Models\WorkoutPlan');
+        return $this->hasMany('API\Models\WorkoutPlan', 'user_id');
     }
 }

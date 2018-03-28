@@ -58,6 +58,10 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
 
             $data = $request->all();
 
+            if (isset($data['password'])) {
+                $data['password'] = Hash::make($data['password']);
+            }
+
             $validator = Validator::make($data, [
                 'first_name' => 'sometimes|required',
                 'last_name' => 'sometimes|required',
@@ -78,10 +82,6 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
                         'email' => 'required|unique_key',
                         'password' => 'required',
                     ]], 422);
-            }
-
-            if (isset($data['password'])) {
-                $data['password'] = Hash::make($data['password']);
             }
 
             $user->fill($data)->save();

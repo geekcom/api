@@ -13,7 +13,7 @@ final class AuthenticateRepository extends BaseRepository implements Authenticat
 
         $user = $this->user->where('email', $data['email'])->first();
 
-        if (count($user) > 0 && Hash::check($data['password'], $user->password)) {
+        if ($user && Hash::check($data['password'], $user->password)) {
             $token = $this->JWTAuth->fromUser($user);
             return response()->json(['status' => 'success', 'data' => ['token' => $token]], 200);
         }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWorkoutTypeTable extends Migration
+class CreateUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateWorkoutTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('workout_type', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('user', function (Blueprint $table) {
+            $table->bigIncrements('user_id');
             $table->uuid('uuid');
-            $table->string('name');
-            $table->string('description');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +32,6 @@ class CreateWorkoutTypeTable extends Migration
      */
     public function down()
     {
-        Schema::drop('workout_type');
+        Schema::drop('user');
     }
 }

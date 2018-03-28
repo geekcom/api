@@ -15,9 +15,9 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=root
 
-  # PHP (with Caddy)
+  # PHP (with Nginx)
   app:
-    image: ambientum/php:7.1-caddy
+    image: ambientum/php:7.2-nginx
     container_name: workoutPlan-api
     volumes:
       - .:/var/www/app

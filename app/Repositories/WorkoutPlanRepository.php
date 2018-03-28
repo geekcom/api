@@ -3,18 +3,18 @@
 namespace API\Repositories;
 
 use API\Repositories\Contracts\WorkoutPlanRepositoryInterface;
-use API\WorkoutPlan;
 use Illuminate\Support\Facades\Validator;
 
 final class WorkoutPlanRepository extends BaseRepository implements WorkoutPlanRepositoryInterface
 {
     public function workoutPlanByUser($id)
     {
-        $workoutPlansByUser = WorkoutPlan::with('user', 'workoutType')
-            ->where('fk_user', $id)
+        $workoutPlansByUser = $this->workoutPlan
+            ->where('user_id', $id)
+            ->with('workoutType')
             ->get();
 
-        if (count($workoutPlansByUser) > 0) {
+        if ($workoutPlansByUser) {
             return response()->json(['status' => 'success', 'data' => ['workoutPlanByUser' => $workoutPlansByUser]], 200);
         }
         return response()->json(['status' => 'error', 'message' => 'no data'], 404);
@@ -25,16 +25,14 @@ final class WorkoutPlanRepository extends BaseRepository implements WorkoutPlanR
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'fk_workout_type' => 'required',
-            'fk_user' => 'required',
+            'user_id' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'status' => 'fail',
                 'data' => [
-                    'fk_workout_type' => 'required',
-                    'fk_user' => 'required',
+                    'user_id' => 'required',
                 ]], 422);
         }
 
@@ -55,16 +53,14 @@ final class WorkoutPlanRepository extends BaseRepository implements WorkoutPlanR
             $data = $request->all();
 
             $validator = Validator::make($data, [
-                'fk_workout_type' => 'sometimes|required',
-                'fk_user' => 'sometimes|required',
+                'user_id' => 'sometimes|required',
             ]);
 
             if ($validator->fails()) {
                 return response()->json([
                     'status' => 'fail',
                     'data' => [
-                        'fk_workout_type' => 'required',
-                        'fk_user' => 'required',
+                        'user_id' => 'required',
                     ]], 422);
             }
 

@@ -12,24 +12,19 @@ class WorkoutPlan extends Model
     use SoftDeletes;
 
     protected $table = 'workout_plan';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'workout_plan_id';
 
     protected $fillable = [
-        'uuid', 'fk_workout_type', 'fk_user'
+        'uuid', 'user_id'
     ];
 
     protected $dates = [
         'deleted_at'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo('API\Models\User', 'fk_user');
-    }
-
     public function workoutType()
     {
-        return $this->belongsTo('API\Models\WorkoutType', 'fk_workout_type');
+        return $this->hasMany('API\Models\WorkoutType', 'workout_plan_id');
     }
 
 }

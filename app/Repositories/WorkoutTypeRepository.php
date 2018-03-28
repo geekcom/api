@@ -3,7 +3,7 @@
 namespace API\Repositories;
 
 use API\Repositories\Contracts\WorkoutTypeRepositoryInterface;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 final class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeRepositoryInterface
 {
@@ -11,7 +11,7 @@ final class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeR
     {
         $workoutType = $this->workoutType->find($id);
 
-        if (count($workoutType) > 0) {
+        if ($workoutType) {
             return response()->json(['status' => 'success', 'data' => ['workoutType' => $workoutType]], 200);
         }
         return response()->json(['status' => 'error', 'message' => 'no data'], 404);
@@ -37,7 +37,7 @@ final class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeR
 
         $workoutType = $this->workoutType->create($data);
 
-        if (count($workoutType) > 0) {
+        if ($workoutType) {
             return response()->json(['status' => 'success'], 201);
         }
         return response()->json(['status' => 'error'], 500);
@@ -47,7 +47,7 @@ final class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeR
     {
         $workoutType = $this->workoutType->find($id);
 
-        if (count($workoutType) > 0) {
+        if ($workoutType) {
 
             $data = $request->all();
 
@@ -77,7 +77,7 @@ final class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeR
     {
         $workoutType = $this->workoutType->find($id);
 
-        if (count($workoutType) > 0) {
+        if ($workoutType) {
             $workoutType->delete();
             return response()->json(['status' => 'success', 'data' => null], 200);
         }
