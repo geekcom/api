@@ -28,6 +28,6 @@ class User extends Authenticatable
 
     public function workoutPlan()
     {
-        return $this->hasMany('API\Models\WorkoutPlan', 'user_id');
+        return $this->hasMany(WorkoutPlan::class, 'user_id');
     }
 }

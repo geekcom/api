@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Validator;
 
 final class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeRepositoryInterface
 {
-    public function show($id)
+    public function show($uuid)
     {
-        $workoutType = $this->workoutType->find($id);
+        $workoutType = $this->findWorkoutTypeByUuid($uuid);
 
         if ($workoutType) {
             return response()->json(['status' => 'success', 'data' => ['workoutType' => $workoutType]], 200);
@@ -43,9 +43,9 @@ final class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeR
         return response()->json(['status' => 'error'], 500);
     }
 
-    public function update($request, $id)
+    public function update($request, $uuid)
     {
-        $workoutType = $this->workoutType->find($id);
+        $workoutType = $this->findWorkoutTypeByUuid($uuid);
 
         if ($workoutType) {
 
@@ -65,7 +65,7 @@ final class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeR
                     ]], 422);
             }
 
-            $workoutType->fill($data)->save();
+            $workoutType->update($data);
 
             return response()->json(['status' => 'success'], 200);
         }
@@ -82,5 +82,13 @@ final class WorkoutTypeRepository extends BaseRepository implements WorkoutTypeR
             return response()->json(['status' => 'success', 'data' => null], 200);
         }
         return response()->json(['status' => 'error'], 404);
+    }
+
+    private function findWorkoutTypeByUuid($uuid)
+    {
+        return $this->workoutType
+            ->where('uuid', $uuid)
+            ->first();
+
     }
 }

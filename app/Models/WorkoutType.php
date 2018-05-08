@@ -24,6 +24,6 @@ class WorkoutType extends Model
 
     public function workoutPlan()
     {
-        return $this->belongsTo('API\Models\WorkoutPlan', 'workout_plan_id');
+        return $this->belongsTo(WorkoutPlan::class, 'workout_plan_id');
     }
 }

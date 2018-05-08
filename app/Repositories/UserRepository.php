@@ -9,9 +9,9 @@ use Illuminate\Validation\Rule;
 
 final class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
-    public function show($id)
+    public function show($uuid)
     {
-        $user = $this->user->find($id);
+        $user = $this->findUserByUuid($uuid);
 
         if ($user) {
             return response()->json(['status' => 'success', 'data' => ['user' => $user]], 200);
@@ -50,9 +50,9 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
         return response()->json(['status' => 'error'], 500);
     }
 
-    public function update($request, $id)
+    public function update($request, $uuid)
     {
-        $user = $this->user->find($id);
+        $user = $this->findUserByUuid($uuid);
 
         if ($user) {
 
@@ -68,7 +68,7 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
                 'email' => [
                     'sometimes',
                     'required',
-                    Rule::unique('user')->ignore($id, 'id'),
+                    Rule::unique('user')->ignore($uuid, 'uuid'),
                 ],
                 'password' => 'sometimes|required',
             ]);
@@ -84,7 +84,7 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
                     ]], 422);
             }
 
-            $user->fill($data)->save();
+            $user->update($data);
 
             return response()->json(['status' => 'success'], 200);
         }
@@ -92,14 +92,22 @@ final class UserRepository extends BaseRepository implements UserRepositoryInter
         return response()->json(['status' => 'error', 'message' => 'no data'], 404);
     }
 
-    public function delete($id)
+    public function delete($uuid)
     {
-        $user = $this->user->find($id);
+        $user = $this->findUserByUuid($uuid);
 
         if ($user) {
             $user->delete();
             return response()->json(['status' => 'success', 'data' => null], 200);
         }
-        return response()->json(['status' => 'error'], 404);
+        return response()->json(['status' => 'error', 'message' => 'no data'], 404);
+    }
+
+    private function findUserByUuid($uuid)
+    {
+        return $this->user
+            ->where('uuid', $uuid)
+            ->first();
+
     }
 }

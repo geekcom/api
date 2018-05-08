@@ -24,7 +24,7 @@ class WorkoutPlan extends Model
 
     public function workoutType()
     {
-        return $this->hasMany('API\Models\WorkoutType', 'workout_plan_id');
+        return $this->hasMany(WorkoutType::class, 'workout_plan_id');
     }
 
 }
