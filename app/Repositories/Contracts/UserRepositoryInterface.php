@@ -11,5 +11,4 @@ interface UserRepositoryInterface
     public function update($request, $uuid);
 
     public function delete($uuid);
-
 }
